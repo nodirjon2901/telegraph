@@ -7,4 +7,4 @@ ARG JAR_FILE=target/telegraph-clone-0.0.1-SNAPSHOT.jar
 #proyektni o'zim tanlagan nom bilan qo'shyapman
 ADD ${JAR_FILE} /my-project
 #proyektni run qilish uchun commanda yozib qo'yamiz
-ENTRYPOINT ["java", "-jar", "/my-project"]
+ENTRYPOINT ["java", "-jar", "/my-project","--spring.profiles.active=docker"]

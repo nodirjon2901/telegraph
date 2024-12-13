@@ -3,9 +3,9 @@ spring:
   application:
     name: telegraph-clone
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/${DB_NAME:telegraph}}
-    username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:-098}
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: -098
     driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: true
