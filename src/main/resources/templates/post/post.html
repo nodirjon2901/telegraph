@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Post</title>
+    <style>
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 70%;
+            text-align: center;
+            margin: auto;
+        }
+
+        #customers td, #customers th {
+            border: 1px solid gray;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: #04AA6D;
+            color: white;
+
+        }
+        a{
+            text-decoration: none;
+            color: #008CBA;
+        }
+        .button {
+            background-color: #04AA6D;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1 style="text-align: center">This is post list</h1>
+<table id="customers" th:unless="${postList.isEmpty()}">
+    <thead>
+    <tr>
+        <th>Author</th>
+        <th>Title</th>
+        <th sec:authorize="hasRole('ADMIN')">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="post : ${postList}">
+        <td th:text="${post.getAuthor()}"></td>
+        <td>
+            <a th:href="@{'/posts/find/'+ ${post.getId()}+'/'+${postOwnerId}}"><p th:text="${post.getTitle()}"></p></a>
+        </td>
+        <td sec:authorize="hasRole('ADMIN')">
+            <form th:action="@{'/posts/delete/'+${post.getId()}+'/'+${postOwnerId}}" method="post">
+                <button class="button">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div th:if="${postList.isEmpty()}">
+    <h2 style="text-align: center">No posts</h2>
+</div>
+</body>
+</html>

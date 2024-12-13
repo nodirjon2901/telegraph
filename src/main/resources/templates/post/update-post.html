@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Post</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Update Post</h2>
+    <form id="comment-form" th:action="@{'/posts/update/'+${postId}+'/'+${oldPost.getOwnerId()}}" method="post">
+        <div class="form-group">
+            <label for="name">Title:</label>
+            <input type="text" id="name" name="title" th:value="${oldPost.getTitle()}" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Your name:</label>
+            <input type="text" id="email" name="author" th:value="${oldPost.getAuthor()}" required>
+        </div>
+        <div class="form-group">
+            <label for="comment">Content:</label>
+            <textarea id="comment" name="content" rows="4" th:text="${oldPost.getContent()}" required></textarea>
+        </div>
+        <input type="hidden" name="ownerId" th:value="${oldPost.getOwnerId()}">
+        <button type="submit">Update</button>
+    </form>
+</div>
+</body>
+</html>

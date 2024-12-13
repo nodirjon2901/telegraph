@@ -1,0 +1,17 @@
+#spring.application.name=telegraph-back
+spring:
+  application:
+    name: telegraph-clone
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/${DB_NAME:telegraph}}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:-098}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true

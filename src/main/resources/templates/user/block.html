@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Block</title>
+    <style>
+        h1{
+            margin: auto;
+            color: red;
+            text-align: center;
+        }
+        img{
+            margin-top: 40px;
+            margin-left: 480px;
+        }
+    </style>
+</head>
+<body>
+<h1 th:text="@{'Sorry '+${loginUser.getFullName()}+', you are blocked!'}"></h1>
+<div class="img">
+    <img th:src="@{/images/user.png}" alt="">
+</div>
+</body>
+</html>

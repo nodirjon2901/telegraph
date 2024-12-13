@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Current-Post</title>
+    <style>
+        h1 {
+            text-align: center;
+            text-transform: uppercase;
+            color: #04AA6D;
+        }
+
+        .author-info {
+            text-align: left;
+            letter-spacing: 3px;
+            margin-right: 160px;
+            margin-left: 160px;
+            color: darkgrey;
+        }
+
+        p {
+            text-indent: 50px;
+            text-align: justify;
+            letter-spacing: 3px;
+            margin-left: 160px;
+            margin-right: 160px;
+            font-size: x-large;
+            font-style: normal;
+        }
+
+        .button-container {
+            text-align: right;
+            margin-right: 160px;
+        }
+
+        .button {
+            background-color: #04AA6D;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1 th:text="${currentPost.getTitle()}"></h1>
+<div class="author-info">
+    <h4 th:text="@{'Author: ' +${currentPost.getAuthor()}}"></h4>
+    <h4 th:text="@{'Created: ' +${currentPost.getCreatedDate().month.toString().toLowerCase()}+' '+${currentPost.getCreatedDate().dayOfMonth}+', '+${currentPost.getCreatedDate().year}}"></h4>
+</div>
+<p th:text="${currentPost.getContent()}"></p>
+<div class="button-container" th:if="${currentPost.getOwnerId().equals(postOwnerId)}">
+    <a th:href="@{'/posts/update/'+${currentPost.getId()}}" class="button">Update</a>
+</div>
+</body>
+</html>
