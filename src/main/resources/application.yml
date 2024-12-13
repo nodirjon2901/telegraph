@@ -2,11 +2,11 @@
 spring:
   application:
     name: telegraph-clone
-  datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: -098
-    driver-class-name: org.postgresql.Driver
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/postgres
+#    username: postgres
+#    password: -098
+#    driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: true
     hibernate:
