@@ -40,6 +40,11 @@ jobs:
   deploy:
     needs: build-test-push
     runs-on: self-hosted
+    permissions:
+      contents: read
+      packages: read
+    env:
+      DOCKER_CONFIG: ${{ github.workspace }}/.docker-config
     steps:
       - uses: actions/checkout@v4
       - name: Log in to GHCR
