@@ -1,10 +1,14 @@
-#proyektni nima orqali run qilayotganligini bildirmoqda
-FROM openjdk:17
-#proyekt dockerda qaysi portda run bo'lishini bildiradi
+# 1-bosqich: JAR'ni build qilish (maven + JDK17 image ichida)
+FROM maven:3.9-eclipse-temurin-17 AS build
+WORKDIR /app
+COPY pom.xml .
+RUN mvn dependency:go-offline -B
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+# 2-bosqich: faqat JAR'ni ishga tushirish (yengil JRE image)
+FROM eclipse-temurin:17-jre-alpine
+WORKDIR /app
+COPY --from=build /app/target/telegraph-clone-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
-#proyekt jar file ni bitta o'zgaruvchiga olib qo'yish
-ARG JAR_FILE=target/telegraph-clone-0.0.1-SNAPSHOT.jar
-#proyektni o'zim tanlagan nom bilan qo'shyapman
-ADD ${JAR_FILE} /my-project
-#proyektni run qilish uchun commanda yozib qo'yamiz
-ENTRYPOINT ["java", "-jar", "/my-project"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
